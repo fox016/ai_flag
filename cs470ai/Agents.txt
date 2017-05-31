@@ -1,0 +1,102 @@
+Nathan Fox
+Artificial Intelligence
+Due 9/24
+
+Agents Homework
+
+---------------------------------------- 1
+Playing Soccer
+
+Performance Measure - 
+An agent playing soccer would have to maximize points scored by its own team and minimize points scored by the opposing team.  It would also have to play according to the rules. It would also need to understand the job of a particular position. You wouldn't want all the agents on the field converging on the ball like a group of 4-year-olds playing soccer, you'd want them to work together like the various parts of a well-oiled machine. So each agent would have to understand its position and how it relates with the other agents on its team and the agents on the opposing team.
+
+Environment -
+The environment includes the field, goal posts, soccer ball, boundary lines, other players, referees, and spectators.
+
+Actuators -
+The agent would have to be able to move around and kick the ball. A goalie might also need to be able to grab and throw the ball. It might also be helpful if the agent had a speaker it could use to communicate with other players.
+
+Sensors -
+The agent would have to have some understanding of where the goal is and where the boundary lines are. It would also have to be aware of where other players are and which players are on its team and which players are opponents.  Being able to listen and to speak to other players could help it to better coordinate movements, but once again it would have to be able to differentiate between team members and opponents.  The agent would also need to know where the ball is and who is in control of it. The agent would also have to be able to hear the referee.
+
+Bidding at an Auction
+
+Performance Measure -
+An agent bidding at an auction would have to try to get an item for as cheap as possible without going over some maximum limit.
+
+Environment -
+The environment includes the item, the auctioneer, and other bidders.
+
+Actuators -
+The agent would have to be able to place a bid. Perhaps the only thing it needs to do is raise its hand when it accepts the bid.
+
+Sensors -
+The agent would have to be able to hear and understand the bid amount spoken by the auctioneer. It would also have to be aware of when other agents rose their hands to take the bid.
+
+---------------------------------------- 2
+Playing Soccer
+
+States -
+There are many states within a soccer game:
+- Your team is in control of the ball
+- You are in control of the ball
+- Your goalie has the ball
+- The opponents are in control of the ball
+- The opponent you are paired with is in control of the ball
+- The opponents' goalie has the ball
+- You are winning
+- You are losing
+- You are tied
+- The ref calls a penalty
+- The ball is near your goal
+- The ball is near the opponents' goal
+- The ball goes out of bounds
+- The game ends in a tie and you go into a shootout
+
+Actions -
+Most actions involve moving and kicking the ball, with the exception of the goalie who can also grab and throw the ball.  There are many reasons why an agent might move: to kick the ball, to block the ball, to block an opponent, to get open for a pass, etc.
+
+Consequences -
+In the case of a soccer game, there are a lot of state/action pairs to consider. The consequence of being near your own goal, having control of the ball, and kicking the ball into your own goal is that your opponents will gain a point. Consequences can include:
+- You gain a point
+- Your oppenent gains a point
+- You gain control of the ball
+- You lose control of the ball
+- The ball moves near your goal
+- The ball moves away from your goal
+- The ball moves towards the opponents' goal
+- The ball moves away from the opponents' goal
+- The ball goes out of bounds on you
+- The ball goes out of bounds on your opponent
+- The ref calls a penalty on you
+
+Goals -
+As I said before, the goals of the agent depend on what position the agent is playing.  The overall goals are to gain your team points and stop the other team from gaining points, but the various agents acheive these goals in different ways. Also, every agent needs to play according to the rules to avoid penalties.
+
+Preferences/Utilities -
+Utility functions map consequences and goals to real numbers defined by preferences.  In the example above where you kick the ball into your own goal, that would be mapped to a low number if your goal includes stopping the other team from gaining points. Because goals are an input to the utility function and the goals are different for each agent, preferences change depending on the agent.
+
+Bidding at an Auction
+
+States -
+- Before the auction starts
+- You hold the highest bid
+- Another agent holds the highest bid
+- Auctioneer has raised the bid but no agent has accepted
+- The bid amount is more than the pre-defined maximum limit (how much money the agent has, how much the agent is willing to spend on this item)
+- The bid amount is less than the pre-defined maximum limit (how much money the agent has, how much the agent is willing to spend on this item)
+- "Going once"
+- "Going twice"
+- The item is sold and the auction is over
+
+Actions -
+The only action an agent can take is accepting a bid by raising its hand.
+
+Consequences -
+Raising your hand is the only action.  In most states, the action of raising your hand has no consequences. The only state that has a consequence is if the auctioneer has raised the bid but no agent has accepted AND you do not hold the highest bid.  The consequence of raising your hand in this state is that you now hold the highest bid and the auctioneer will raise the bid.
+
+Goals -
+The goal is implied in the problem description. The goal is to get the item for the cheapest price possible without going over a pre-determined limit.
+
+Preferences/Utilities -
+Utility functions map consequences and goals to real numbers defined by preferences. If the auctioneer has raised the bid but no agent has accepted AND you do not hold the highest bid AND the bid amount is LESS that your limit AND your goal is to get the item without going over your limit, that should map to a high value so that you accept the bid.  In the same situation where the bid amount is MORE than your limit, that should map to a low value so that you do not accept the bid.

@@ -1,0 +1,15 @@
+Nathan Fox
+Artificial Intelligence
+Due Mon 11/4
+
+Sequential Bayes HW
+
+Key Points:
+
+Observations that we get from sensors are imperfect.  However, we can estimate the truth by taking the average of many sensor readings.  Because it takes time to gather many sensor readings, we can caluculate the average iteratively, making the estimate improve over time.  A better way to estimate the truth, however, is to use Bayes Rule.  We can define a finite set of states to consider as the true state.  The initial prior for each of these states is 1 divided by the size of our set of considered states.  We can use the mean and standard deviation of the sensor readings (given the true state) to calculate the likelihood of each considered state.  The normalizer is calculated by taking p(x|s)p(s) summed over each state s. Then to use Bayes Rule iteratively, we use the posterior estimate from the previous observation as the prior for the next observation.  From the set of considered states, we find the state that maximizes the posterior probablitly and we accept that state as the true state.  Because Bayes takes advantage of the prior calculations, we converge on the true value more quickly.
+
+Muddy Points:
+
+How do we know the mean and standard deviation of the sensor readings (used to calculate the likelihood)?  In the example, we knew the true state and then added the noise using the true state as the mean and we chose a standard deviation of 2.  In a real-world example, would we have to know the mean and standard deviation of sensor readings before we began?  That's what I assume, since each sensor would be different.
+
+I'm not sure I understand how to calculate the normalizer.  It says to take p(x|s)p(s) summed over each state s.  But what observation do you use?  Just the most recent?  That's what I'm assuming.

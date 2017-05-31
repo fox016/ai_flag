@@ -1,0 +1,25 @@
+Nathan Fox
+Artificial Intelligence
+Due Wed 11/20
+
+Kalman HW
+
+1 - What I learned from the Kalman tutorial
+
+To estimate the true value of a state, we can make multiple observations.  We can plot the Gaussian distribution using the mean and covariance of these observations.  Making observations takes time, so we want to have an initial estimate that improves over time as further observations and predictions are made. The Kalman filter allows us to iteratively estimate the mean and covariance so that we can make decisions as we make observations.  The Kalman filter uses a form of Bayes rule where the prior is a Gaussian distribution and the observation likelihood is a Gaussian distribution.  This is because both observations and our model of the system are imperfect (noisy).  The prediction made by our model of the system, P(x_{t+1}|x_t) ~ N(Fx_t,sigma_x^2), is used for the prior.  The observation likelihood is represented by the distribution P(z_t|x_t) ~ N(Hx_t,sigma_z^2).  Because the prior and the observation likelihood are both Gaussian distributions, the posterior (our estimate of the true state) is also a Gaussian distribution.  Being a Gaussian distribution, the posterior (our estimate) has a mean and a covariance.  We can use old estimates of the mean and covariance to produce new estimates (see equations 15.22).  These new estimates, mu_{t+1} and sigma_{t+1}, represent the mean and covariance of our new estimate of the true state (which, remember, is a Gaussian distribution).
+
+2 - sig0=10.5 for C7
+
+The distribution for the original estimate of the state is huge. This is because we set the initial covariance to be much larger.  The covariance of future estimates is unaffected.
+
+3 - sest = s + 10.5 * randn(2,1) for C7
+
+The original estimate is way off because of all the noise. Future estimates, however, are still fairly close to the true state.
+
+4 - Amplify Sx
+
+The predicted states are less accurate because the noise of the system model was amplified.
+
+5 - Amplify Sz
+
+The observations are way less accurate because the noise of the observations was amplified.

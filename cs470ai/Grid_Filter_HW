@@ -1,0 +1,42 @@
+Nathan Fox
+Artificial Intelligence
+Due Wed 11/6
+
+Grid Filter HW
+
+1. Observation Model
+
+From the start, the MATLAB code knows which grid cells are occupied and which are not.  The pseudocode for making observations is as follows:
+
+For each grid cell within sensor range:
+	If occupied:
+		If a random number n = [0,1] <= TrueHit then the observation is a hit, otherwise a miss
+	If not occupied:
+		If a random number n = [0,1] <= FalseAlarm then the observation at that cell is a hit, otherwise a miss
+	If we observed a hit:
+		Belief of occupancy is TrueHit * probability that cell is occupied
+		Belief of unoccupancy is FalseAlarm * probability that cell is unoccupied
+	If we did not observe a hit:
+		Belief of occupancy is (1-TrueHit) * probability that cell is occupied
+		Belief of unoccupancy is (1-FalseAlarm) * probability that cell is unoccupied
+	Update probabilty that cell is occupied based on two beliefs (using normalization)
+
+In essence, if a cell is occupied, there is a TrueHit probability that it will be observed as a hit.  Likewise, if a cell is not occupied, there is a FalseAlarm probability that it will be observed as a hit.  The belief in occupancy and the belief in unoccupancy are both calculated based on the prior probability that the cell is occupied.  The posterior is then calculated based on the two beliefs, and the posterior is used as the prior probability for the next time the cell is evaluated.
+
+In this model, TrueHit and FalseAlarm correspond to the likelihood in Bayes rule.  "Likelihood" means the probability of an observation given a state.  TrueHit is given that the state is occupied, and defines the probability that the observation is a hit.  FalseAlarm is given that the state is unoccupied, and defines the probability that the observation is a hit.
+
+2. Changing the Likelihood
+
+When I changed TrueHit down to 0.5 and kept FalseAlarm at 0.6, it seemed to barely update anything.  Occupied cells and unoccupied cells were indistinguishable after several passes over an area.
+
+Changing TrueHit down to 0.8 and keeping FalseAlarm at 0.6 still made it difficult to distinguish occupied and unoccupied cells until an area had been passed over two or three times.
+
+With TrueHit at 0.8 and FalseAlarm at 0.3, it was much easier to distinguish between occupied and unoccupied cells after a single pass.
+
+Keeping TrueHit at 0.98 and lowering FalseAlarm to 0.3, a single pass made it almost perfectly clear which cells were occupied and which were not.
+
+When the TrueHit value is lowered, belief of occupancy when we observe a hit is lowered. Belief of occupancy when we do not observe a hit is raised.  This extra uncertainty makes it require more passes to make a significant change in the cell's probability of being occupied.
+
+When the FalseAlarm value is lowered, belief of unoccupancy when we observe a hit is lowered.  Belief of occupancy when we do not observe a hit is also lowered.  Our uncertainty is lowered, which allows us to make a more significant change in the cell's probablilty of being occupied.
+
+Changing TrueHit to 1.0 and lowering FalseAlarm to 0.0 revealed everything perfectly in the first pass.  When FalseAlarm is 0, the belief of unoccupancy when we observe a hit is 0.  When TrueHit is 1, the belief of occupancy when we do not observe a hit is 0.  Thus when we update the probability that a cell is occupied based on our beliefs, the probabilty comes out to be 1 if we observe a hit and 0 if we observe a miss.
